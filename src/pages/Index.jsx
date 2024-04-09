@@ -110,13 +110,13 @@ const Index = () => {
         {isLoggedIn ? (
           <Text>Welcome!</Text>
         ) : (
-          <Flex>
-            <Input placeholder="Email" mr={2} value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input placeholder="Password" type="password" mr={2} value={password} onChange={(e) => setPassword(e.target.value)} />
-            <Button leftIcon={<FaSignInAlt />} onClick={handleLogin}>
+          <Flex align="center">
+            <Input placeholder="Email" mr={4} value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input placeholder="Password" type="password" mr={4} value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Button leftIcon={<FaSignInAlt />} onClick={handleLogin} mr={2}>
               Login
             </Button>
-            <Button leftIcon={<FaUserPlus />} ml={2} colorScheme="green" onClick={handleSignup}>
+            <Button leftIcon={<FaUserPlus />} ml={4} colorScheme="green" onClick={handleSignup}>
               Signup
             </Button>
           </Flex>
