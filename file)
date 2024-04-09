@@ -1,0 +1,20 @@
+import React from "react";
+import { Box, Flex, Text, IconButton } from "@chakra-ui/react";
+import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
+
+const Footer = () => {
+  return (
+    <Box bg="gray.100" py={8}>
+      <Flex justify="space-between" align="center" maxW="6xl" mx="auto" px={8}>
+        <Text fontSize="sm">© 2023 My Blog. All rights reserved.</Text>
+        <Flex>
+          <IconButton icon={<FaTwitter />} variant="ghost" aria-label="Twitter" mr={2} />
+          <IconButton icon={<FaFacebook />} variant="ghost" aria-label="Facebook" mr={2} />
+          <IconButton icon={<FaInstagram />} variant="ghost" aria-label="Instagram" />
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
+
+export default Footer;

@@ -113,29 +113,33 @@ const Index = () => {
           <Flex align="center">
             <Input placeholder="Email" mr={4} value={email} onChange={(e) => setEmail(e.target.value)} />
             <Input placeholder="Password" type="password" mr={4} value={password} onChange={(e) => setPassword(e.target.value)} />
-            <Button leftIcon={<FaSignInAlt />} onClick={handleLogin} mr={2}>
+            <Button onClick={handleLogin} mr={2} colorScheme="blue" size="lg" fontWeight="bold" borderRadius="full" px={8} py={6}>
               Login
             </Button>
-            <Button leftIcon={<FaUserPlus />} ml={4} colorScheme="green" onClick={handleSignup}>
+            <Button ml={4} colorScheme="green" size="lg" fontWeight="bold" borderRadius="full" px={8} py={6} onClick={handleSignup}>
               Signup
             </Button>
           </Flex>
         )}
       </Flex>
 
-      <Grid templateColumns="2fr 1fr" gap={8} p={8}>
+      <Grid templateColumns="2fr 1fr" gap={12} p={12} bg="gray.50">
         <Box>
-          <Heading size="xl" mb={4}>
+          <Heading size="2xl" mb={8} color="blue.600">
             Latest Posts
           </Heading>
           {posts.map((post) => (
             <Box key={post.id} mb={8}>
-              <Heading size="lg">{post.title}</Heading>
-              <Image src={post.image} alt={post.title} my={4} />
-              <Text>{post.content}</Text>
+              <Heading size="xl" mb={4}>
+                {post.title}
+              </Heading>
+              <Image src={post.image} alt={post.title} mb={6} borderRadius="lg" />
+              <Text fontSize="lg" lineHeight="tall" mb={4}>
+                {post.content}
+              </Text>
               <Flex mt={2}>
                 {post.tags.map((tag) => (
-                  <Box key={tag} bg="blue.500" color="white" px={2} py={1} mr={2} borderRadius="md">
+                  <Box key={tag} bg="blue.100" color="blue.800" px={3} py={1} mr={2} borderRadius="full" fontSize="sm" fontWeight="medium">
                     {tag}
                   </Box>
                 ))}
@@ -145,12 +149,14 @@ const Index = () => {
         </Box>
 
         <Box>
-          <Heading size="xl" mb={4}>
+          <Heading size="2xl" mb={8} color="blue.600">
             Recommended Topics
           </Heading>
           {recommendedTopics.map((topic) => (
             <Box key={topic} mb={2}>
-              <Text>{topic}</Text>
+              <Text fontSize="lg" mb={2} _hover={{ color: "blue.500", cursor: "pointer" }}>
+                {topic}
+              </Text>
             </Box>
           ))}
         </Box>
