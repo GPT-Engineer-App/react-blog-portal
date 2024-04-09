@@ -13,26 +13,30 @@ const Index = () => {
   const toast = useToast();
 
   useEffect(() => {
-    // Fetch posts and recommended topics from API
-    // For simplicity, using dummy data here
-    setPosts([
-      {
-        id: 1,
-        title: "First Blog Post",
-        image: "https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxibG9nJTIwcG9zdCUyMGltYWdlfGVufDB8fHx8MTcxMjY4Njk0OHww&ixlib=rb-4.0.3&q=80&w=1080",
-        content: "This is the first blog post...",
-        tags: ["react", "webdev"],
-      },
-      {
-        id: 2,
-        title: "Second Blog Post",
-        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwyfHxibG9nJTIwcG9zdCUyMGltYWdlfGVufDB8fHx8MTcxMjY4Njk0OHww&ixlib=rb-4.0.3&q=80&w=1080",
-        content: "This is the second blog post...",
-        tags: ["javascript", "tutorial"],
-      },
-    ]);
+    const fetchData = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        if (accessToken) {
+          setIsLoggedIn(true);
+        }
 
-    setRecommendedTopics(["React", "Web Development", "JavaScript", "Tutorials"]);
+        const postsResponse = await fetch(`${API_URL}/posts`);
+        if (postsResponse.ok) {
+          const postsData = await postsResponse.json();
+          setPosts(postsData);
+        }
+
+        const topicsResponse = await fetch(`${API_URL}/topics`);
+        if (topicsResponse.ok) {
+          const topicsData = await topicsResponse.json();
+          setRecommendedTopics(topicsData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleLogin = async () => {
@@ -67,6 +71,13 @@ const Index = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
+      toast({
+        title: "Login Failed",
+        description: "An error occurred during login",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -100,6 +111,13 @@ const Index = () => {
       }
     } catch (error) {
       console.error("Signup error:", error);
+      toast({
+        title: "Signup Failed",
+        description: "An error occurred during signup",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
